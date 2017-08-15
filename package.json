@@ -1,28 +1,40 @@
 {
   "name": "gitlab-ci",
   "version": "0.0.1",
-  "description": "CLI tool to interact with gitlab CI",
+  "description": "CLI tool to handle gitlab CI project variables",
   "author": "Khoa Tran",
+  "bin": {
+    "setAllVars": "bin/setAllVariables.js"
+  },
+  "main": "bin/setAllVariables.js",
+  "files": [
+    "bin"
+  ],
   "scripts": {
+    "lint": "$(npm bin)/eslint src",
     "test": "NODE_ENV=test $(npm bin)/mocha --recursive --compilers js:babel-core/register test",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "build": "$(npm bin)/babel src --out-dir bin",
+    "preversion": "npm run build && npm run lint"
   },
   "dependencies": {
     "axios": "^0.16.2",
     "commander": "^2.11.0",
     "js-yaml": "^3.9.1",
-    "url-parse": "^1.1.9",
-    "yaml-js": "^0.2.0"
+    "url-parse": "^1.1.9"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.9.0",
     "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-plugin-transform-async-to-module-method": "^6.24.1",
-    "babel-plugin-transform-builtin-extend": "^1.1.2",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "bluebird": "^3.5.0",
     "chai": "^4.1.1",
+    "eslint": "^4.4.1",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-plugin-import": "^2.7.0",
     "mocha": "^3.5.0"
   }
 }

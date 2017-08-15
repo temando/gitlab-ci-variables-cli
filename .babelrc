@@ -18,14 +18,6 @@
     [
       "transform-async-to-module-method",
       { "module": "bluebird", "method": "coroutine" }
-    ],
-    [
-      "babel-plugin-transform-builtin-extend",
-      {
-        "globals": [
-          "Error"
-        ]
-      }
     ]
   ]
 }
