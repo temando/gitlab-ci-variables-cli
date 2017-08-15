@@ -1,0 +1,28 @@
+{
+  "name": "gitlab-ci",
+  "version": "0.0.1",
+  "description": "CLI tool to interact with gitlab CI",
+  "author": "Khoa Tran",
+  "scripts": {
+    "test": "NODE_ENV=test $(npm bin)/mocha --recursive --compilers js:babel-core/register test",
+    "test:watch": "npm run test -- --watch"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "commander": "^2.11.0",
+    "js-yaml": "^3.9.1",
+    "url-parse": "^1.1.9",
+    "yaml-js": "^0.2.0"
+  },
+  "devDependencies": {
+    "axios-mock-adapter": "^1.9.0",
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-async-to-module-method": "^6.24.1",
+    "babel-plugin-transform-builtin-extend": "^1.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "bluebird": "^3.5.0",
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": "4.3"
+        },
+        "exclude": [
+          "transform-regenerator",
+          "transform-es2015-classes"
+        ]
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-runtime",
+    [
+      "transform-async-to-module-method",
+      { "module": "bluebird", "method": "coroutine" }
+    ],
+    [
+      "babel-plugin-transform-builtin-extend",
+      {
+        "globals": [
+          "Error"
+        ]
+      }
+    ]
+  ]
+}
