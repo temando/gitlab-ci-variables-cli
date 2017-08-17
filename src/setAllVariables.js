@@ -44,7 +44,7 @@ async function execute(cmd) {
 
   // By default, force update for existing variables
   let forceUpdate = true;
-  if (cmd.donotforce) {
+  if (cmd.doNotForce) {
     forceUpdate = false;
   }
 
@@ -59,14 +59,14 @@ program
   .description('Read all key/value pairs under gitlab.env.yml on the current directory and sets them as environment variables on Gitlab CI')
   .option(
     '--url <url>',
-    'Your Gitlab project URL, e.g. https://src.temando.io/khoa.tran/temando-field-manual-tome',
+    'Your Gitlab project URL, e.g. https://gitlab.com/gitlab-org/gitlab-ce',
   )
   .option(
     '--token <token>',
     'Your Gitlab token.',
   )
   .option(
-    '--donotforce',
+    '--do-not-force',
     'Ignore variables if they already exist on gitlab CI. By default all variables are overridden',
   );
 

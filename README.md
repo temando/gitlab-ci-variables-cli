@@ -16,7 +16,17 @@ $ npm install -g gitlab-ci-variables-setter-cli
 
 ## Usage
 
-- Put all required variable key/values on a properties file named `gitlab.env.yml`. For an example of the file format, check out `test/fixtures/test.yml`.
+- Put all required variable key/values on a properties file named `gitlab.env.yml`. For example:
+
+```yml
+AWS_CREDENTIALS: |
+    [canary]
+    aws_access_key_id = AKIA1234
+    aws_secret_access_key = verySecretKey
+NPM_INSTALL_TOKEN: 123456789
+```
+
+Note that the value for `AWS_CREDENTIALS` is a multi line string (with spaces and no tabs).
 
 - Run the following command from the directory that contains the properties file:
 
@@ -24,10 +34,10 @@ $ npm install -g gitlab-ci-variables-setter-cli
 $ setAllVars --url <gitlab-project-url> --token <gitlab-token>
 ```
 
-where `gitlab-project-url` is the url to view your project on gitlab, e.g. https://src.temando.io/khoa.tran/temando-field-manual-tome
+where `gitlab-project-url` is the url to view your project on gitlab, e.g. https://gitlab.com/gitlab-org/gitlab-ce
 
-By default, all existing variables on gitlab ci will be overridden. If you wish to ignore those existing variables, add a `--donotforce` option, i.e.
+By default, all existing variables on gitlab ci will be overridden. If you wish to ignore those existing variables, add a `--do-not-force` option, i.e.
 
 ```sh
-$ setAllVars --url <gitlab-project-url> --token <gitlab-token> --donotforce
+$ setAllVars --url <gitlab-project-url> --token <gitlab-token> --do-not-force
 ```
