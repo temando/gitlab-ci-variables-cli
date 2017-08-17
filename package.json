@@ -1,6 +1,6 @@
 {
   "name": "gitlab-ci-variables-setter-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CLI tool to handle gitlab CI project variables",
   "author": "Khoa Tran",
   "license": "MIT",
@@ -8,6 +8,10 @@
     "gitlab",
     "gitlab-ci"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:quangkhoa/gitlab-ci-variables-cli.git"
+  },
   "bin": {
     "setAllVars": "bin/setAllVariables.js"
   },
