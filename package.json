@@ -1,6 +1,6 @@
 {
   "name": "gitlab-ci-variables-setter-cli",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "CLI tool to handle gitlab CI project variables",
   "author": "Khoa Tran",
   "license": "MIT",
@@ -22,11 +22,9 @@
   "scripts": {
     "lint": "$(npm bin)/eslint src",
     "test": "NODE_ENV=test $(npm bin)/mocha --recursive --compilers js:babel-core/register test",
-    "test:watch": "npm run test -- --watch",
-    "build": "$(npm bin)/babel src --out-dir bin",
-    "clean": "rm -Rf bin",
-    "deploy": "npm run clean && npm run build && npm link",
     "test:coverage": "$(npm bin)/nyc --check-coverage --lines 90 --reporter=text --reporter=text-summary npm test",
+    "build": "rm -Rf bin && $(npm bin)/babel src --out-dir bin --source-maps inline",
+    "deploy": "npm run build && npm link",
     "preversion": "npm run build && npm run lint && npm run test"
   },
   "dependencies": {
@@ -40,8 +38,8 @@
     "axios-mock-adapter": "^1.9.0",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-async-to-module-method": "^6.24.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "chai": "^4.1.1",
     "eslint": "^4.4.1",
