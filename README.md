@@ -1,5 +1,8 @@
-Gitlab CI Variables Bulk Setter
-=========
+# Gitlab CI Variables Bulk Setter
+
+[![NPM](https://img.shields.io/npm/v/gitlab-ci-variables-setter-cli.svg)](https://npmjs.org/packages/gitlab-ci-variables-setter-cli/)
+[![Travis CI](https://img.shields.io/travis/quangkhoa/gitlab-ci-variables-cli.svg)](https://travis-ci.org/quangkhoa/gitlab-ci-variables-cli)
+[![MIT License](https://img.shields.io/github/license/quangkhoa/gitlab-ci-variables-cli.svg)](https://en.wikipedia.org/wiki/MIT_License)
 
 CLI tool to allow setting multiple environment variables on Gitlab CI, instead of going through Gitlab UI and adding individual variables.
 
