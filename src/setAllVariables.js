@@ -2,8 +2,10 @@
 
 import program from 'commander';
 import fs from 'fs';
-import loadPropertiesFile from './lib/properties-file';
+import gitRemoteOriginUrl from 'git-remote-origin-url';
+import getUrlFromGitRemote from './lib/git';
 import gitlabCI from './lib/gitlab-ci';
+import loadPropertiesFile from './lib/properties-file';
 
 const gitlabEnvFileName = 'gitlab.env.yml';
 
@@ -16,10 +18,6 @@ const gitlabEnvFileName = 'gitlab.env.yml';
 function validate(options = {}) {
   const errors = [];
 
-  if (options.url === undefined) {
-    errors.push('No Gitlab project URL given.');
-  }
-
   if (options.token === undefined) {
     errors.push('No Gitlab token given.');
   }
@@ -29,6 +27,18 @@ function validate(options = {}) {
 
 async function execute(cmd) {
   const errors = validate(cmd);
+
+  // If there is no url provided, get it!
+  let url = cmd.url;
+  if (!url) {
+    try {
+      url = await getUrlFromGitRemote(gitRemoteOriginUrl);
+      console.log('No URL specified, using git remote `origin`.');
+    } catch (err) {
+      errors.push('No Gitlab project URL given.');
+    }
+  }
+
   if (errors.length > 0) {
     console.error(errors.join('\n'));
     process.exit(1);
@@ -49,7 +59,7 @@ async function execute(cmd) {
   }
 
   const properties = loadPropertiesFile(path);
-  const handler = gitlabCI(cmd.url, cmd.token);
+  const handler = gitlabCI(url, cmd.token);
   await handler.setVariables(properties, forceUpdate);
 
   console.log('Completed setting variables on Gitlab CI.');
