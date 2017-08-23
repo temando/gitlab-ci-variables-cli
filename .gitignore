@@ -2,3 +2,4 @@ node_modules
 bin
 gitlab.env.yml
 .nyc_output
+.gitlabrc

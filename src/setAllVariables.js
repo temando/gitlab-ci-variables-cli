@@ -2,6 +2,7 @@
 
 import program from 'commander';
 import fs from 'fs';
+import rc from 'rc';
 import gitRemoteOriginUrl from 'git-remote-origin-url';
 import getUrlFromGitRemote from './lib/git';
 import gitlabCI from './lib/gitlab-ci';
@@ -10,15 +11,16 @@ import loadPropertiesFile from './lib/properties-file';
 const gitlabEnvFileName = 'gitlab.env.yml';
 
 async function execute(cmd) {
+  const conf = rc('gitlab');
   const errors = [];
 
   // Check for token
-  if (cmd.token === undefined) {
+  if (!conf.token) {
     errors.push('No Gitlab token given.');
   }
 
   // If there is no url provided, get it!
-  let url = cmd.url;
+  let url = conf.url;
   if (!url) {
     try {
       url = await getUrlFromGitRemote(gitRemoteOriginUrl);
@@ -48,7 +50,7 @@ async function execute(cmd) {
   }
 
   const properties = loadPropertiesFile(path);
-  const handler = gitlabCI(url, cmd.token);
+  const handler = gitlabCI(url, conf.token);
   await handler.setVariables(properties, forceUpdate);
 
   console.log('Completed setting variables on Gitlab CI.');
