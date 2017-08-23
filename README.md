@@ -32,6 +32,9 @@ NPM_INSTALL_TOKEN: 123456789
 
 Run the following command from the directory that contains the properties file, where:
 
+- `gitlab-token` is your Gitlab personal access token
+- `gitlab-project-url` is your project url on gitlab, e.g. https://gitlab.com/gitlab-org/gitlab-ce
+
 ```sh
 $ setAllVars --token <gitlab-token> --url <gitlab-project-url>
 ```

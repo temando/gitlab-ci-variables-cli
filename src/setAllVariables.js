@@ -9,24 +9,13 @@ import loadPropertiesFile from './lib/properties-file';
 
 const gitlabEnvFileName = 'gitlab.env.yml';
 
-/**
- * Validate CLI options
- *
- * @param {Object} options
- * @return {Array} array of errors. Empty array if no errors
- */
-function validate(options = {}) {
+async function execute(cmd) {
   const errors = [];
 
-  if (options.token === undefined) {
+  // Check for token
+  if (cmd.token === undefined) {
     errors.push('No Gitlab token given.');
   }
-
-  return errors;
-}
-
-async function execute(cmd) {
-  const errors = validate(cmd);
 
   // If there is no url provided, get it!
   let url = cmd.url;
