@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## Unreleased
 
+## [v1.1.0] - 2017-08-24
+
 ### Changed
 
 - The `--url` option became optional. When omitted, the plugin will infer the URL from the git remote.
