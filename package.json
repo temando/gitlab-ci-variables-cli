@@ -1,7 +1,7 @@
 {
   "name": "gitlab-ci-variables-setter-cli",
   "version": "1.0.10",
-  "description": "CLI tool to handle gitlab CI project variables",
+  "description": "CLI tool to allow setting multiple pipeline variables on Gitlab CI.",
   "author": "Khoa Tran",
   "license": "MIT",
   "keywords": [
@@ -31,18 +31,20 @@
     "axios": "^0.16.2",
     "bluebird": "^3.5.0",
     "commander": "^2.11.0",
+    "git-remote-origin-url": "^2.0.0",
+    "git-url-parse": "^7.0.0",
     "js-yaml": "^3.9.1",
     "url-parse": "^1.1.9"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.9.0",
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-async-to-module-method": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "chai": "^4.1.1",
-    "eslint": "^4.4.1",
+    "eslint": "^4.5.0",
     "eslint-config-airbnb-base": "^11.3.1",
     "eslint-plugin-import": "^2.7.0",
     "mocha": "^3.5.0",

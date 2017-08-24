@@ -4,10 +4,10 @@ import URL from 'url-parse';
 /**
  * Provides utility functions to simplify interacting with a GitLab CI project through the API
  *
- * @param url
- * @param token
+ * @param {string} url
+ * @param {string} token
  *
- * @return {Object} utility functions wrapped in an object
+ * @return {object} utility functions wrapped in an object
  */
 export default function gitlabCI(url, token) {
   const parsedUrl = new URL(url);
