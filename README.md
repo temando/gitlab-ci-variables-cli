@@ -67,11 +67,12 @@ This project supports `.gitlabrc` files using [rc](https://www.npmjs.com/package
 If `--token` is not specified, this project can use a `.gitlabrc`, e.g:
 
 ```ini
-token: this-is-my-gitlab-token
+token = this-is-my-gitlab-token
 ```
 
 ```sh
 $ setAllVars --url <gitlab-project-url>
+Using token from .gitlabrc.
 Set AWS_CREDENTIALS = <value> for gitlab-org/gitlab-ce.
 Set NPM_INSTALL_TOKEN = <value> for gitlab-org/gitlab-ce.
 Completed setting variables on Gitlab CI.

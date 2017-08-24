@@ -19,6 +19,10 @@ async function execute(cmd) {
     errors.push('No Gitlab token given.');
   }
 
+  if (conf.config) {
+    console.log(`Using token from ${conf.config}.`);
+  }
+
   // If there is no url provided, get it!
   let url = conf.url;
   if (!url) {
