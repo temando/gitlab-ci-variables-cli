@@ -3,6 +3,9 @@
   "version": "1.0.10",
   "description": "CLI tool to allow setting multiple pipeline variables on Gitlab CI.",
   "author": "Khoa Tran",
+  "contributors": [
+    "Brendan Abbott <brendan@bloodbone.ws>"
+  ],
   "license": "MIT",
   "keywords": [
     "gitlab",
@@ -34,6 +37,7 @@
     "git-remote-origin-url": "^2.0.0",
     "git-url-parse": "^7.0.0",
     "js-yaml": "^3.9.1",
+    "rc": "^1.2.1",
     "url-parse": "^1.1.9"
   },
   "devDependencies": {

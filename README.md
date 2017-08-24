@@ -18,7 +18,7 @@ $ npm install -g gitlab-ci-variables-setter-cli
 
 ## Usage
 
-Put all required variable key/values on a properties file named `gitlab.env.yml`. For example:
+Put all required variable key/values on a properties file named `gitlab.env.yml`, e.g:
 
 ```yml
 AWS_CREDENTIALS: |
@@ -37,18 +37,54 @@ Run the following command from the directory that contains the properties file, 
 
 ```sh
 $ setAllVars --token <gitlab-token> --url <gitlab-project-url>
+Set AWS_CREDENTIALS = <value> for gitlab-org/gitlab-ce.
+Set NPM_INSTALL_TOKEN = <value> for gitlab-org/gitlab-ce.
+Completed setting variables on Gitlab CI.
 ```
 
-By default, all existing variables on Gitlab CI will be overridden. If you wish to ignore existing variables, add a `--do-not-force` option, i.e.
+By default, all existing variables on Gitlab CI will be overridden. If you wish to ignore existing variables, add a `--do-not-force` option, e.g:
 
 ```sh
 $ setAllVars --token <gitlab-token> --url <gitlab-project-url> --do-not-force
+Skipping AWS_CREDENTIALS, already set for gitlab-org/gitlab-ce.
+Skipping NPM_INSTALL_TOKEN, already set for gitlab-org/gitlab-ce.
+Completed setting variables on Gitlab CI.
 ```
 
-If your working directory is a git repostory of your project, the `--url` option can be omitted, i.e:
+If your working directory is a git repostory of your project, the `--url` option can be omitted, e.g:
 
 ```sh
 $ setAllVars --token <gitlab-token>
+No URL specified, using git remote `origin`.
+Set AWS_CREDENTIALS = <value> for gitlab-org/gitlab-ce.
+Set NPM_INSTALL_TOKEN = <value> for gitlab-org/gitlab-ce.
+Completed setting variables on Gitlab CI.
 ```
 
 > Omitting `--url` will derive the URL from the remote named `origin`.
+
+This project supports `.gitlabrc` files using [rc](https://www.npmjs.com/package/rc).
+If `--token` is not specified, this project can use a `.gitlabrc`, e.g:
+
+```ini
+token = this-is-my-gitlab-token
+```
+
+```sh
+$ setAllVars --url <gitlab-project-url>
+Using token from .gitlabrc.
+Set AWS_CREDENTIALS = <value> for gitlab-org/gitlab-ce.
+Set NPM_INSTALL_TOKEN = <value> for gitlab-org/gitlab-ce.
+Completed setting variables on Gitlab CI.
+```
+
+Essentially, if your project is a git repository, and you have `.gitlabrc` file,
+no options are required and this tool can be invoked simply as:
+
+```sh
+$ setAllVars
+No URL specified, using git remote `origin`.
+Set AWS_CREDENTIALS = <value> for gitlab-org/gitlab-ce.
+Set NPM_INSTALL_TOKEN = <value> for gitlab-org/gitlab-ce.
+Completed setting variables on Gitlab CI.
+```
