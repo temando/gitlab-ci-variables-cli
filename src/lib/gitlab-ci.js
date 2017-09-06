@@ -1,5 +1,6 @@
 import axios from 'axios';
 import URL from 'url-parse';
+import isPrimitive from 'is-primitive';
 
 /**
  * Provides utility functions to simplify interacting with a GitLab CI project through the API
@@ -22,6 +23,20 @@ export default function gitlabCI(url, token) {
   const tokenQueryString = `private_token=${token}`;
 
   /**
+   * Will serialise a value using `JSON.stringify` if it is not primative.
+   *
+   * @param {any} value
+   * @return {string|number|boolean}
+   */
+  function serialiseValue(value) {
+    if (!isPrimitive(value)) {
+      return JSON.stringify(value);
+    }
+
+    return value;
+  }
+
+  /**
    * Set project variable
    *
    * @param key
@@ -35,7 +50,7 @@ export default function gitlabCI(url, token) {
       url: `${apiUrl}?${tokenQueryString}`,
       data: {
         key,
-        value,
+        value: serialiseValue(value),
       },
     });
 
@@ -56,7 +71,7 @@ export default function gitlabCI(url, token) {
       url: `${apiUrl}/${key}?${tokenQueryString}`,
       data: {
         key,
-        value,
+        value: serialiseValue(value),
       },
     });
 
@@ -91,7 +106,7 @@ export default function gitlabCI(url, token) {
     const keysToSet = Object.keys(properties);
 
     const promises = keysToSet.map(async (key) => {
-      const value = JSON.stringify(properties[key], null, 2);
+      const value = properties[key];
       const keyExists = existingKeys.some(existingKey => existingKey === key);
 
       if (keyExists && !forceUpdate) {
@@ -108,7 +123,7 @@ export default function gitlabCI(url, token) {
         variable = await setVariable(key, value);
       }
 
-      console.log(`Set ${key} = ${value} for ${projectId}`);
+      console.log(`Set ${key} = ${JSON.stringify(value)} for ${projectId}`);
       return variable;
     });
 

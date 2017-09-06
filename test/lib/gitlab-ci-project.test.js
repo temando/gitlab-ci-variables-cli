@@ -6,6 +6,7 @@ import gitlabCIProject from '../../src/lib/gitlab-ci';
 
 const mock = new MockAdapter(axios);
 const gitlabToken = 'gitlabToken';
+const apiBase = 'https://src.temando.io/api/v4/projects/khoa.tran%2Ftemando-field-manual-tome';
 
 describe('gitlab-ci-project-handler', () => {
   afterEach(() => {
@@ -26,7 +27,7 @@ describe('gitlab-ci-project-handler', () => {
       },
     ];
 
-    mock.onGet(`https://src.temando.io/api/v4/projects/khoa.tran%2Ftemando-field-manual-tome/variables?private_token=${gitlabToken}`).reply(200, mockResponse);
+    mock.onGet(`${apiBase}/variables?private_token=${gitlabToken}`).reply(200, mockResponse);
 
     const handler = gitlabCIProject('https://src.temando.io/khoa.tran/temando-field-manual-tome', gitlabToken);
     const variables = await handler.listVariables();
@@ -42,7 +43,7 @@ describe('gitlab-ci-project-handler', () => {
       value: 'env2',
       protected: false,
     };
-    mock.onPut(`https://src.temando.io/api/v4/projects/khoa.tran%2Ftemando-field-manual-tome/variables/ENV?private_token=${gitlabToken}`).reply(200, mockResponse);
+    mock.onPut(`${apiBase}/variables/ENV?private_token=${gitlabToken}`).reply(200, mockResponse);
 
     const handler = gitlabCIProject('https://src.temando.io/khoa.tran/temando-field-manual-tome', gitlabToken);
     const variable = await handler.updateVariable('ENV', 'env2');
@@ -58,7 +59,12 @@ describe('gitlab-ci-project-handler', () => {
         value: 'env2',
         protected: false,
       };
-      mock.onPost(`https://src.temando.io/api/v4/projects/khoa.tran%2Ftemando-field-manual-tome/variables?private_token=${gitlabToken}`).reply(200, mockResponse);
+      mock
+        .onPost(`${apiBase}/variables?private_token=${gitlabToken}`, {
+          key: 'ENV',
+          value: 'env2',
+        })
+        .reply(200, mockResponse);
 
       const handler = gitlabCIProject('https://src.temando.io/khoa.tran/temando-field-manual-tome', gitlabToken);
       const variable = await handler.setVariable('ENV', 'env2');
@@ -73,7 +79,12 @@ describe('gitlab-ci-project-handler', () => {
         value: '{"hello":"world"}',
         protected: false,
       };
-      mock.onPost(`https://src.temando.io/api/v4/projects/khoa.tran%2Ftemando-field-manual-tome/variables?private_token=${gitlabToken}`).reply(200, mockResponse);
+      mock
+        .onPost(`${apiBase}/variables?private_token=${gitlabToken}`, {
+          key: 'MSG',
+          value: '{"hello":"world"}',
+        })
+        .reply(200, mockResponse);
 
       const handler = gitlabCIProject('https://src.temando.io/khoa.tran/temando-field-manual-tome', gitlabToken);
       const variable = await handler.setVariable('MSG', { hello: 'world' });
@@ -96,10 +107,8 @@ describe('gitlab-ci-project-handler', () => {
         },
       ];
 
-      mock.onGet(`https://src.temando.io/api/v4/projects/khoa.tran%2Ftemando-field-manual-tome/variables?private_token=${gitlabToken}`).reply(200, mockListVariablesResponse);
-      mock.onPost(`https://src.temando.io/api/v4/projects/khoa.tran%2Ftemando-field-manual-tome/variables?private_token=${gitlabToken}`).reply(200, {
-        REGION: 'us-east-1',
-      });
+      mock.onGet(`${apiBase}/variables?private_token=${gitlabToken}`).reply(200, mockListVariablesResponse);
+      mock.onPost(`${apiBase}/variables?private_token=${gitlabToken}`).reply(200, { REGION: 'us-east-1' });
 
       const handler = gitlabCIProject('https://src.temando.io/khoa.tran/temando-field-manual-tome', gitlabToken);
       const properties = {
@@ -126,13 +135,9 @@ describe('gitlab-ci-project-handler', () => {
         },
       ];
 
-      mock.onGet(`https://src.temando.io/api/v4/projects/khoa.tran%2Ftemando-field-manual-tome/variables?private_token=${gitlabToken}`).reply(200, mockListVariablesResponse);
-      mock.onPost(`https://src.temando.io/api/v4/projects/khoa.tran%2Ftemando-field-manual-tome/variables?private_token=${gitlabToken}`).reply(200, {
-        REGION: 'us-east-1',
-      });
-      mock.onPut(`https://src.temando.io/api/v4/projects/khoa.tran%2Ftemando-field-manual-tome/variables/ENV?private_token=${gitlabToken}`).reply(200, {
-        ENV: 'env2',
-      });
+      mock.onGet(`${apiBase}/variables?private_token=${gitlabToken}`).reply(200, mockListVariablesResponse);
+      mock.onPost(`${apiBase}/variables?private_token=${gitlabToken}`).reply(200, { REGION: 'us-east-1' });
+      mock.onPut(`${apiBase}/variables/ENV?private_token=${gitlabToken}`).reply(200, { ENV: 'env2' });
 
       const handler = gitlabCIProject('https://src.temando.io/khoa.tran/temando-field-manual-tome', gitlabToken);
       const properties = {
