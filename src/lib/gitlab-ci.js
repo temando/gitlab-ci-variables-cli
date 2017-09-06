@@ -91,7 +91,7 @@ export default function gitlabCI(url, token) {
     const keysToSet = Object.keys(properties);
 
     const promises = keysToSet.map(async (key) => {
-      const value = properties[key];
+      const value = JSON.stringify(properties[key], null, 2);
       const keyExists = existingKeys.some(existingKey => existingKey === key);
 
       if (keyExists && !forceUpdate) {

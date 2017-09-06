@@ -36,21 +36,6 @@ describe('gitlab-ci-project-handler', () => {
     expect(variables[1].key).to.equal('ENV');
   });
 
-  it('set variable', async () => {
-    const mockResponse = {
-      key: 'ENV',
-      value: 'env2',
-      protected: false,
-    };
-    mock.onPost(`https://src.temando.io/api/v4/projects/khoa.tran%2Ftemando-field-manual-tome/variables?private_token=${gitlabToken}`).reply(200, mockResponse);
-
-    const handler = gitlabCIProject('https://src.temando.io/khoa.tran/temando-field-manual-tome', gitlabToken);
-    const variable = await handler.setVariable('ENV', 'env2');
-
-    expect(variable.key).to.equal('ENV');
-    expect(variable.value).to.equal('env2');
-  });
-
   it('update variable', async () => {
     const mockResponse = {
       key: 'ENV',
@@ -67,6 +52,36 @@ describe('gitlab-ci-project-handler', () => {
   });
 
   context('set variables', () => {
+    it('set variable', async () => {
+      const mockResponse = {
+        key: 'ENV',
+        value: 'env2',
+        protected: false,
+      };
+      mock.onPost(`https://src.temando.io/api/v4/projects/khoa.tran%2Ftemando-field-manual-tome/variables?private_token=${gitlabToken}`).reply(200, mockResponse);
+
+      const handler = gitlabCIProject('https://src.temando.io/khoa.tran/temando-field-manual-tome', gitlabToken);
+      const variable = await handler.setVariable('ENV', 'env2');
+
+      expect(variable.key).to.equal('ENV');
+      expect(variable.value).to.equal('env2');
+    });
+
+    it('set variable with object value', async () => {
+      const mockResponse = {
+        key: 'MSG',
+        value: '{"hello":"world"}',
+        protected: false,
+      };
+      mock.onPost(`https://src.temando.io/api/v4/projects/khoa.tran%2Ftemando-field-manual-tome/variables?private_token=${gitlabToken}`).reply(200, mockResponse);
+
+      const handler = gitlabCIProject('https://src.temando.io/khoa.tran/temando-field-manual-tome', gitlabToken);
+      const variable = await handler.setVariable('MSG', { hello: 'world' });
+
+      expect(variable.key).to.equal('MSG');
+      expect(variable.value).to.equal('{"hello":"world"}');
+    });
+
     it('do not force update', async () => {
       const mockListVariablesResponse = [
         {
