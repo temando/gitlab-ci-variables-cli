@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## Unreleased
 
+### Fixed
+
+- Values, such as objects, are now serialised prior to saving in Gitlab.
+
 ## [v1.1.0] - 2017-08-24
 
 ### Changed
