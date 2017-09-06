@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## Unreleased
 
+Nil.
+
+## [v1.1.2] - 2017-09-06
+
 ### Fixed
 
 - Only serialise non-primitive values (such as object and function).
