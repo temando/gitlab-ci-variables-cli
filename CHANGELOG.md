@@ -6,7 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## Unreleased
 
-Nil.
+### Changed
+
+- Introduce sub-commands to add the possibility to set a variable on the fly, without a `gitlab.env.yml`.
+- The `token` can be retrieved from env variable.
+- New commands are :
+    - `glci sv <options>` to set one variable.
+    - `glci sav <options>` to set all variables in `gitlab.env.yml`.
 
 ## [v1.1.2] - 2017-09-06
 

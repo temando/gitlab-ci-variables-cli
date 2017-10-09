@@ -4,7 +4,8 @@
   "description": "CLI tool to allow setting multiple pipeline variables on Gitlab CI.",
   "author": "Khoa Tran",
   "contributors": [
-    "Brendan Abbott <brendan@bloodbone.ws>"
+    "Brendan Abbott <brendan@bloodbone.ws>",
+    "Baptiste Redon <batred.12@gmail.com>"
   ],
   "license": "MIT",
   "keywords": [
