@@ -37,14 +37,14 @@ export default function gitlabCI(url, token) {
   }
 
   /**
-   * Set project variable
+   * Create project variable
    *
    * @param key
    * @param value
    *
    * @return {Promise<Object>} variable object
    */
-  async function setVariable(key, value) {
+  async function createVariable(key, value) {
     const response = await axios({
       method: 'post',
       url: `${apiUrl}?${tokenQueryString}`,
@@ -107,7 +107,7 @@ export default function gitlabCI(url, token) {
 
     const promises = keysToSet.map(async (key) => {
       const value = properties[key];
-      const keyExists = existingKeys.some(existingKey => existingKey === key);
+      const keyExists = existingKeys.includes(key);
 
       if (keyExists && !forceUpdate) {
         console.log(`Skipping ${key}, already set for ${projectId}.`);
@@ -120,7 +120,7 @@ export default function gitlabCI(url, token) {
         variable = await updateVariable(key, value);
       } else {
         // Create variable
-        variable = await setVariable(key, value);
+        variable = await createVariable(key, value);
       }
 
       console.log(`Set ${key} = ${JSON.stringify(value)} for ${projectId}`);
@@ -133,7 +133,7 @@ export default function gitlabCI(url, token) {
   }
 
   return {
-    setVariable,
+    createVariable,
     updateVariable,
     listVariables,
     setVariables,
