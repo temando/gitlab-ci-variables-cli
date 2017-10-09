@@ -67,7 +67,7 @@ describe('gitlab-ci-project-handler', () => {
         .reply(200, mockResponse);
 
       const handler = gitlabCIProject('https://src.temando.io/khoa.tran/temando-field-manual-tome', gitlabToken);
-      const variable = await handler.setVariable('ENV', 'env2');
+      const variable = await handler.createVariable('ENV', 'env2');
 
       expect(variable.key).to.equal('ENV');
       expect(variable.value).to.equal('env2');
@@ -87,7 +87,7 @@ describe('gitlab-ci-project-handler', () => {
         .reply(200, mockResponse);
 
       const handler = gitlabCIProject('https://src.temando.io/khoa.tran/temando-field-manual-tome', gitlabToken);
-      const variable = await handler.setVariable('MSG', { hello: 'world' });
+      const variable = await handler.createVariable('MSG', { hello: 'world' });
 
       expect(variable.key).to.equal('MSG');
       expect(variable.value).to.equal('{"hello":"world"}');
