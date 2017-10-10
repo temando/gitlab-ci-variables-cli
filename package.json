@@ -4,7 +4,8 @@
   "description": "CLI tool to allow setting multiple pipeline variables on Gitlab CI.",
   "author": "Khoa Tran",
   "contributors": [
-    "Brendan Abbott <brendan@bloodbone.ws>"
+    "Brendan Abbott <brendan@bloodbone.ws>",
+    "Baptiste Redon <batred.12@gmail.com>"
   ],
   "license": "MIT",
   "keywords": [
@@ -16,9 +17,9 @@
     "url": "git@github.com:temando/gitlab-ci-variables-cli.git"
   },
   "bin": {
-    "setAllVars": "bin/setAllVariables.js"
+    "glci": "bin/glci.js"
   },
-  "main": "bin/setAllVariables.js",
+  "main": "bin/glci.js",
   "files": [
     "bin"
   ],
