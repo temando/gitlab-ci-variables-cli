@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 import program from 'commander';
+import npmPackage from '../package.json';
 
 program
-  .version('0.1.0')
+  .version(npmPackage.version)
   .command('sv', 'set a variable')
   .command('sav', 'set all variables')
   .parse(process.argv);
