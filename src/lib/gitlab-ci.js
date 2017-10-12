@@ -54,6 +54,8 @@ export default function gitlabCI(url, token) {
       },
     });
 
+    console.log(`Created new variable ${key} = ${JSON.stringify(value)}`);
+
     return response.data;
   }
 
@@ -74,6 +76,8 @@ export default function gitlabCI(url, token) {
         value: serialiseValue(value),
       },
     });
+
+    console.log(`Updated variable ${key} = ${JSON.stringify(value)}`);
 
     return response.data;
   }
@@ -110,7 +114,7 @@ export default function gitlabCI(url, token) {
       const keyExists = existingKeys.includes(key);
 
       if (keyExists && !forceUpdate) {
-        console.log(`Skipping ${key}, already set for ${projectId}.`);
+        console.log(`Skipped variable ${key}, already set for project.`);
         return undefined;
       }
 
@@ -123,7 +127,6 @@ export default function gitlabCI(url, token) {
         variable = await createVariable(key, value);
       }
 
-      console.log(`Set ${key} = ${JSON.stringify(value)} for ${projectId}`);
       return variable;
     });
 
