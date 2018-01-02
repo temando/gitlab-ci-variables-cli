@@ -12,6 +12,7 @@ import isPrimitive from 'is-primitive';
  */
 export default function gitlabCI(url, token) {
   const parsedUrl = new URL(url);
+  const perPageDefault = 100;
 
   // Construct project id by encoding namespace/projectName
   const projectId = parsedUrl.pathname
@@ -21,6 +22,7 @@ export default function gitlabCI(url, token) {
 
   const apiUrl = `${parsedUrl.origin}/api/v4/projects/${projectId}/variables`;
   const tokenQueryString = `private_token=${token}`;
+  const perPageQueryString = `per_page=${perPageDefault}`;
 
   /**
    * Will serialise a value using `JSON.stringify` if it is not primative.
@@ -88,7 +90,7 @@ export default function gitlabCI(url, token) {
    * @return {Promise<Array>} array of variable objects
    */
   async function listVariables() {
-    const response = await axios.get(`${apiUrl}?${tokenQueryString}`);
+    const response = await axios.get(`${apiUrl}?${tokenQueryString}&${perPageQueryString}`);
 
     return response.data;
   }
