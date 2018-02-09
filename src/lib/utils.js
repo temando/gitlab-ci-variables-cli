@@ -34,8 +34,8 @@ async function getConf() {
     }
   }
 
-  if (!conf.out) {
-    conf.out = gitlabEnvFileName;
+  if (!conf.output) {
+    conf.output = gitlabEnvFileName;
   }
 
   if (errors.length > 0) {

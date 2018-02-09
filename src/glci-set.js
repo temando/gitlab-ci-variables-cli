@@ -42,15 +42,15 @@ program
   )
   .option(
     '--token <token>',
-    'Your Gitlab token.',
+    'Your Gitlab token',
   )
   .option(
     '--key <key>',
-    'Your Gitlab CI variable.',
+    'Your Gitlab CI variable',
   )
   .option(
     '--value <value>',
-    'Your Gitlab CI value.',
+    'Your Gitlab CI value',
   )
   .option(
     '--do-not-force',
