@@ -2,7 +2,7 @@ import rc from 'rc';
 import fs from 'fs';
 import gitRemoteOriginUrl from 'git-remote-origin-url';
 import getUrlFromGitRemote from './git';
-import loadPropertiesFile from './properties-file';
+import { loadPropertiesFile } from './properties-file';
 
 const gitlabEnvFileName = 'gitlab.env.yml';
 
@@ -32,6 +32,10 @@ async function getConf() {
     } catch (err) {
       errors.push('No Gitlab project URL given.');
     }
+  }
+
+  if (!conf.out) {
+    conf.out = gitlabEnvFileName;
   }
 
   if (errors.length > 0) {

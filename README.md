@@ -18,7 +18,7 @@ $ npm install -g gitlab-ci-variables-setter-cli
 
 ## Usage
 
-### One variable (`glci sv`)
+### Save one variable (`glci sv`)
 
 Run the following command, where:
 
@@ -33,7 +33,7 @@ Set <key> = <value> for gitlab-org/gitlab-ce.
 Completed setting variable on Gitlab CI.
 ```
 
-### Several variables (`glci sav`)
+### Save several variables (`glci sav`)
 
 Put all required variable key/values on a properties file named `gitlab.env.yml`, e.g:
 
@@ -57,6 +57,22 @@ $ glci sav --token <gitlab-token> --url <gitlab-project-url>
 Set AWS_CREDENTIALS = <value> for gitlab-org/gitlab-ce.
 Set NPM_INSTALL_TOKEN = <value> for gitlab-org/gitlab-ce.
 Completed setting variables on Gitlab CI.
+```
+
+### Load several variables (`glci lav`)
+
+Download all variable key/values to a properties file.
+
+Run the following command to save the properties file to `gitlab.env.yml` in the current directory or
+optionally specify an alternative destination, eg.
+
+- `gitlab-token` is your Gitlab personal access token
+- `gitlab-project-url` is your project url on gitlab, e.g. https://gitlab.com/gitlab-org/gitlab-ce
+
+```sh
+$ glci lav --token <gitlab-token> --url <gitlab-project-url> --out gitlab.env.yml
+Downloaded variables from Gitlab CI.
+Saved variables to gitlab.env.yml
 ```
 
 #### For all usages
