@@ -9,7 +9,7 @@ import yaml from 'js-yaml';
  *
  * @return {Object} properties
  */
-export default function loadPropertiesFile(path) {
+export function loadPropertiesFile(path) {
   let doc;
   try {
     const contents = fs.readFileSync(path, 'utf8');

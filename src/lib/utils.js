@@ -2,7 +2,7 @@ import rc from 'rc';
 import fs from 'fs';
 import gitRemoteOriginUrl from 'git-remote-origin-url';
 import getUrlFromGitRemote from './git';
-import loadPropertiesFile from './properties-file';
+import { loadPropertiesFile } from './properties-file';
 
 const gitlabEnvFileName = 'gitlab.env.yml';
 
