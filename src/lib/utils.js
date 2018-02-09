@@ -34,6 +34,10 @@ async function getConf() {
     }
   }
 
+  if (!conf.out) {
+    conf.out = gitlabEnvFileName;
+  }
+
   if (errors.length > 0) {
     console.error(errors.join('\n'));
     process.exit(1);

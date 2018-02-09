@@ -20,3 +20,25 @@ export default function loadPropertiesFile(path) {
 
   return doc;
 }
+
+/**
+ * Save properties object into properties file
+ * A property is a key/value pair.
+ *
+ * @param path
+ * @param obj
+ *
+ */
+export function savePropertiesFile(path, obj) {
+  const contents = {};
+  obj.forEach((envVar) => {
+    contents[envVar.key] = envVar.value;
+  });
+
+  try {
+    const string = yaml.safeDump(contents);
+    fs.writeFileSync(path, string, 'utf8');
+  } catch (error) {
+    console.log(error);
+  }
+}
