@@ -63,13 +63,14 @@ Completed setting variables on Gitlab CI.
 
 Download all variable key/values to a properties file.
 
-Run the following command from the directory that contains the properties file, eg.
+Run the following command to save the properties file to `gitlab.env.yml` in the current directory or
+optionally specify an alternative destination, eg.
 
 - `gitlab-token` is your Gitlab personal access token
 - `gitlab-project-url` is your project url on gitlab, e.g. https://gitlab.com/gitlab-org/gitlab-ce
 
 ```sh
-$ glci lav --token <gitlab-token> --url <gitlab-project-url>
+$ glci lav --token <gitlab-token> --url <gitlab-project-url> --out gitlab.env.yml
 Downloaded variables from Gitlab CI.
 Saved variables to gitlab.env.yml
 ```
