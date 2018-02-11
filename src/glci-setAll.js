@@ -23,7 +23,7 @@ program
   )
   .option(
     '--token <token>',
-    'Your Gitlab token.',
+    'Your Gitlab token',
   )
   .option(
     '--do-not-force',

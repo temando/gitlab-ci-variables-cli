@@ -5,9 +5,9 @@ import npmPackage from '../package.json';
 
 program
   .version(npmPackage.version)
-  .command('sv', 'set a variable')
-  .command('sav', 'set all variables')
-  .command('lav', 'load all variables')
+  .command('set', 'set a variable')
+  .command('setAll', 'set all variables')
+  .command('getAll', 'load all variables')
   .parse(process.argv);
 
 if (!process.argv.slice(1).length) {

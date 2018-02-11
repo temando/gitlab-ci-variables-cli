@@ -13,26 +13,26 @@ async function execute() {
 
   console.log('Downloaded variables from Gitlab CI.');
 
-  savePropertiesFile(`${process.cwd()}/conf.out`, resp);
+  savePropertiesFile(`${process.cwd()}/${conf.output}`, resp);
 
-  console.log(`Saved variables to ${conf.out}`);
+  console.log(`Saved variables to ${conf.output}`);
 
   return resp;
 }
 
 program
-  .description('Read all key/value pairs from Gitlab API and saves them to the specified .yml file')
+  .description('Read all key/value pairs from Gitlab API and save them to the specified output file')
   .option(
     '--url <url>',
     'Your Gitlab project URL, e.g. https://gitlab.com/gitlab-org/gitlab-ce',
   )
   .option(
     '--token <token>',
-    'Your Gitlab token.',
+    'Your Gitlab token',
   )
   .option(
-    '--out <out>',
-    'The location to save CI values to.',
+    '--output <output>',
+    'The location to save the result to',
     'gitlab.env.yml',
   )
   .parse(process.argv);

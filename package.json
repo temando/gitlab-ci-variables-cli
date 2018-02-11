@@ -1,11 +1,12 @@
 {
-  "name": "gitlab-ci-variables-setter-cli",
+  "name": "gitlab-ci-variables-cli",
   "version": "2.0.0",
-  "description": "CLI tool to allow setting pipeline variables on Gitlab CI.",
+  "description": "CLI tool to set/get pipeline variables on Gitlab CI.",
   "author": "Khoa Tran <quangkhoa@gmail.com>",
   "contributors": [
     "Brendan Abbott <brendan@bloodbone.ws>",
-    "Baptiste Redon <batred.12@gmail.com>"
+    "Baptiste Redon <batred.12@gmail.com>",
+    "Julian Fell"
   ],
   "license": "MIT",
   "keywords": [
