@@ -1,6 +1,6 @@
 # Gitlab CI Variables Setter CLI
 
-[![NPM](https://img.shields.io/npm/v/gitlab-ci-variables-setter-cli.svg)](https://npmjs.org/packages/gitlab-ci-variables-setter-cli/)
+[![NPM](https://img.shields.io/npm/v/gitlab-ci-variables-cli.svg)](https://npmjs.org/packages/gitlab-ci-variables-cli/)
 [![Travis CI](https://img.shields.io/travis/temando/gitlab-ci-variables-cli.svg)](https://travis-ci.org/temando/gitlab-ci-variables-cli)
 [![MIT License](https://img.shields.io/github/license/temando/gitlab-ci-variables-cli.svg)](https://en.wikipedia.org/wiki/MIT_License)
 
