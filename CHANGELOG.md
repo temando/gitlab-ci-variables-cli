@@ -4,11 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [v3.0.0] - 2018-02-12
+
+### Added
+- Add `getAll` option to download all Gitlab CI pipeline variables into a file
 
 ### Changed
 
 - Improve console info messages.
+- Rename command options for ease of understanding, e.g. `sv` => `set`, `sav` => `setAll`
 
 ## [v2.0.0] - 2017-10-12
 
