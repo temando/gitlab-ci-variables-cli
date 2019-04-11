@@ -15,12 +15,19 @@ export default function gitlabCI(url, token) {
   const perPageDefault = 100;
 
   // Construct project id by encoding namespace/projectName
-  const projectId = parsedUrl.pathname
+  const chunks = parsedUrl.pathname
     .split('/')
-    .filter(x => x)
-    .join('%2F');
+    .filter(x => x);
 
-  const apiUrl = `${parsedUrl.origin}/api/v4/projects/${projectId}/variables`;
+  let apiLevel = "projects";
+  if (chunks.length == 1) {
+      // if user haven't specified project name, then work on groups level
+      apiLevel = "groups";
+  }
+
+  const resourceId = chunks.join('%2F');
+
+  const apiUrl = `${parsedUrl.origin}/api/v4/${apiLevel}/${resourceId}/variables`;
   const tokenQueryString = `private_token=${token}`;
   const perPageQueryString = `per_page=${perPageDefault}`;
 
