@@ -43,22 +43,36 @@ export default function gitlabCI(url, token) {
    *
    * @param key
    * @param value
-   *
+   * @param isProtected
+   * @param masked
+   * @param raw
+   * @param scope
    * @return {Promise<Object>} variable object
    */
-  async function createVariable(key, value) {
-    const response = await axios({
+  async function createVariable(key, value, isProtected, masked, raw, scope) {
+    await axios({
       method: 'post',
       url: `${apiUrl}?${tokenQueryString}`,
       data: {
         key,
         value: serialiseValue(value),
+        protected: isProtected,
+        masked,
+        raw,
+        environment_scope: scope,
       },
+    }).then((response) => {
+      console.log(`Created new variable ${key} = ${JSON.stringify(value)}`);
+
+      return response.data;
+    }).catch((error) => {
+      console.log(`Creation failed: ${error}`);
+
+      if (masked) {
+        console.log('Retrying unmasked...');
+        createVariable(key, value, isProtected, false, raw, scope);
+      }
     });
-
-    console.log(`Created new variable ${key} = ${JSON.stringify(value)}`);
-
-    return response.data;
   }
 
   /**
@@ -66,22 +80,36 @@ export default function gitlabCI(url, token) {
    *
    * @param key
    * @param value
-   *
+   * @param isProtected
+   * @param masked
+   * @param raw
+   * @param scope
    * @return {Promise<Object>} variable object
    */
-  async function updateVariable(key, value) {
-    const response = await axios({
+  async function updateVariable(key, value, isProtected, masked, raw, scope) {
+    await axios({
       method: 'put',
       url: `${apiUrl}/${key}?${tokenQueryString}`,
       data: {
         key,
         value: serialiseValue(value),
+        protected: isProtected,
+        masked,
+        raw,
+        environment_scope: scope,
       },
+    }).then((response) => {
+      console.log(`Updated variable ${key} = ${JSON.stringify(value)}`);
+
+      return response.data;
+    }).catch((error) => {
+      console.log(`Update failed: ${error}`);
+
+      if (masked) {
+        console.log('Retrying unmasked...');
+        updateVariable(key, value, isProtected, false, raw, scope);
+      }
     });
-
-    console.log(`Updated variable ${key} = ${JSON.stringify(value)}`);
-
-    return response.data;
   }
 
   /**
@@ -99,11 +127,15 @@ export default function gitlabCI(url, token) {
    * Set project variables
    *
    * @param {Object} properties
-   * @param forceUpdate if true, override existing values, otherwise ignore them
+   * @param forceUpdate
+   * @param isProtected
+   * @param masked
+   * @param raw
+   * @param scope
    *
    * @return {Promise<Array>} array of variable objects
    */
-  async function setVariables(properties, forceUpdate) {
+  async function setVariables(properties, forceUpdate, isProtected, masked, raw, scope) {
     if (!properties) {
       return null;
     }
@@ -123,10 +155,10 @@ export default function gitlabCI(url, token) {
       let variable;
       if (keyExists) {
         // Update variable
-        variable = await updateVariable(key, value);
+        variable = await updateVariable(key, value, isProtected, masked, raw, scope);
       } else {
         // Create variable
-        variable = await createVariable(key, value);
+        variable = await createVariable(key, value, isProtected, masked, raw, scope);
       }
 
       return variable;

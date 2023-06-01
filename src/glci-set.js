@@ -19,15 +19,20 @@ async function execute(cmd) {
 
   const keyExists = existingKeys.includes(conf.key);
 
+  const isProtected = Boolean(cmd.protected);
+  const masked = Boolean(cmd.masked);
+  const raw = Boolean(cmd.raw);
+  const scope = cmd.environmentScope !== undefined ? cmd.environmentScope : '*';
+
   if (keyExists && cmd.doNotForce) {
     console.log(`Skipping ${conf.key}, already set.`);
     return undefined;
   }
 
   if (keyExists) {
-    resp = await handler.updateVariable(conf.key, conf.value);
+    resp = await handler.updateVariable(conf.key, conf.value, isProtected, masked, raw, scope);
   } else {
-    resp = await handler.createVariable(conf.key, conf.value);
+    resp = await handler.createVariable(conf.key, conf.value, isProtected, masked, raw, scope);
   }
 
   console.log('Completed setting variable on Gitlab CI.');
@@ -53,8 +58,20 @@ program
     'Your Gitlab CI value',
   )
   .option(
-    '--do-not-force',
-    'Ignore variable if it already exists on gitlab CI. By default variable is overridden',
+    '--protected',
+    'Set the variable as protected. By default it is not protected',
+  )
+  .option(
+    '--masked',
+    'Set the variable as masked. By default it is not masked',
+  )
+  .option(
+    '--raw',
+    'Set the variable as raw. By default it is not raw',
+  )
+  .option(
+    '--environment-scope <environment-scope>',
+    'Set the environment scope. By default it is set to *',
   )
   .parse(process.argv);
 
