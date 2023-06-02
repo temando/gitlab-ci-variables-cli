@@ -118,9 +118,19 @@ export default function gitlabCI(url, token) {
    * @return {Promise<Array>} array of variable objects
    */
   async function listVariables() {
-    const response = await axios.get(`${apiUrl}?${tokenQueryString}&${perPageQueryString}`);
+    let response = await axios.get(`${apiUrl}?${tokenQueryString}&${perPageQueryString}&page=1`);
 
-    return response.data;
+    const nbPages = response.headers['x-total-pages'] !== undefined ? response.headers['x-total-pages'] : 1;
+
+    let data = response.data;
+
+    for (let page = 2; page <= nbPages; page += 1) {
+      /* eslint-disable no-await-in-loop */
+      response = await axios.get(`${apiUrl}?${tokenQueryString}&${perPageQueryString}&page=${page}`);
+      data = [...data, ...response.data];
+    }
+
+    return data;
   }
 
   /**
