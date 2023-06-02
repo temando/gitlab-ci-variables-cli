@@ -26,9 +26,9 @@
   ],
   "scripts": {
     "lint": "$(npm bin)/eslint src",
-    "test": "NODE_ENV=test $(npm bin)/mocha --recursive --compilers js:babel-core/register test",
-    "test:coverage": "$(npm bin)/nyc --check-coverage --lines 90 --reporter=text --reporter=text-summary npm test",
-    "build": "rm -Rf bin && $(npm bin)/babel src --out-dir bin --source-maps inline",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --recursive --compilers js:babel-core/register test",
+    "test:coverage": "./node_modules/.bin/nyc --check-coverage --lines 90 --reporter=text --reporter=text-summary npm test",
+    "build": "rm -Rf bin && ./node_modules/.bin/babel src --out-dir bin --source-maps inline && chmod +x ./bin/*.js",
     "deploy": "npm run build && npm link",
     "preversion": "npm run build && npm run lint && npm run test"
   },
